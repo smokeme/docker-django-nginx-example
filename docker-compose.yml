@@ -1,0 +1,29 @@
+version: '3'
+services:
+  postgres:
+    container_name: postgres
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: django
+      POSTGRES_USER: django
+      POSTGRES_DB: django
+    restart: always
+    ports:
+      - '5432:5432'
+    volumes:
+      - db:/db
+    
+  app:
+    container_name: webapp
+    restart: always
+    build: .
+    ports:
+      - '80:80'
+    links:
+      - 'postgres'
+    depends_on:
+      - 'postgres'
+    command: bash -c "python3 /home/docker/code/app/manage.py migrate && supervisord -n"
+volumes:
+  db:
+

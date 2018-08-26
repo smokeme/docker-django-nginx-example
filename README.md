@@ -39,3 +39,14 @@ Dockerfile
 
 uWSGI chdirs to /app so in uwsgi.ini you will need to make sure the python path
 to the wsgi.py file is relative to that.
+
+### Docker compose 
+
+To use both postgres & django 
+
+#### Build 
+* `docker-compose up`
+#### Shutdown
+* `docker-compose down`
+
+This will not save the data in a volume so create one prior to using this in production 
